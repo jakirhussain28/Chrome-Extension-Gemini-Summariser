@@ -9,7 +9,7 @@ app = Flask(__name__)
 CORS(app)
 
 # Configure your Google API Key
-GOOGLE_API_KEY = "AIzaSyCijKCTJnI6DJwzeZ-Dc085E1gbMN4A6J8"  # Replace with your actual API key
+GOOGLE_API_KEY = "api"  # it is removed at present due to public repo
 genai.configure(api_key=GOOGLE_API_KEY)
 # genai.configure(api_key=os.environ.get("GEMINI_API_KEY"))
 
