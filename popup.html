@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      body {
+        margin: 0;
+        padding: 20px;
+        font-family: Arial, sans-serif;
+        color: white;
+        /* Changed background to a larger animated gradient */
+        background: linear-gradient(45deg, rgba(255, 105, 180, 1), rgba(138, 43, 226, 1), rgba(255, 206, 86, 1), rgba(75, 192, 192, 1));
+        background-size: 400% 400%; /* Make the background larger than the body */
+        animation: gradientAnimation 15s ease infinite; /* Apply the animation */
+        border-radius: 15px;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+        width: 300px;
+        text-align: center;
+      }
+
+      /* Keyframes for the gradient animation */
+      @keyframes gradientAnimation {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
+      }
+
+      #copied-text, #summarized-text {
+        font-size: 14px;
+        line-height: 1.5;
+        background: rgba(255, 255, 255, 0.2);
+        padding: 10px;
+        border-radius: 10px;
+        margin-bottom: 15px;
+        word-wrap: break-word;
+      }
+
+      button {
+        padding: 10px 20px;
+        background: rgba(255, 255, 255, 0.2);
+        border: 2px solid white;
+        border-radius: 10px;
+        color: white;
+        cursor: pointer;
+        font-size: 14px;
+        transition: all 0.3s ease;
+        margin-top: 10px; /* Added margin for separation */
+      }
+
+      button:hover {
+        background: rgba(255, 255, 255, 0.4);
+        transform: scale(1.1);
+      }
+    </style>
+  </head>
+  <body>
+    <h3>Copied Text</h3>
+    <div id="copied-text">No text copied yet.</div>
+    <button id="summarizeButton">Summarize Text</button>
+    <h3>Summarized Text</h3>
+    <div id="summarized-text">Click "Summarize Text" to get a summary.</div>
+    <p>Highlight text on a webpage, and it will appear here.</p>
+    <script src="popup.js"></script>
+  </body>
+</html>

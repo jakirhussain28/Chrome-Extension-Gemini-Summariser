@@ -1,0 +1,39 @@
+import os
+from flask import Flask, request, jsonify
+import google.generativeai as genai
+
+app = Flask(__name__)
+
+# Configure your Google API Key
+# It's recommended to load this from an environment variable
+# For demonstration, you can put it directly here, but be cautious with security.
+genai.configure(api_key=os.environ.get("GEMINI_API_KEY"))
+
+@app.route('/summarize', methods=['POST'])
+def summarize_text():
+    data = request.get_json()
+    text_to_summarize = data.get('text')
+
+    if not text_to_summarize:
+        return jsonify({"error": "No text provided for summarization"}), 400
+
+    try:
+        model = genai.GenerativeModel('gemini-2.0-flash')
+        prompt = f"Please summarize the following text concisely: {text_to_summarize}"
+        response = model.generate_content(prompt)
+
+        # Access the text from the candidate's content parts
+        summary = ""
+        if response.candidates:
+            for part in response.candidates[0].content.parts:
+                if hasattr(part, 'text'):
+                    summary += part.text
+
+        return jsonify({"summary": summary.strip()})
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+if __name__ == '__main__':
+    # Run the Flask app
+    # For production, use a more robust WSGI server like Gunicorn or uWSGI
+    app.run(host='127.0.0.1', port=5000, debug=True)
